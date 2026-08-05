@@ -185,3 +185,8 @@ INSERT INTO stock (produit_id, taille_id, quantite) VALUES
 (10,2,6),(10,3,10),(10,4,9),(10,5,5),
 (11,7,25),
 (12,7,40);
+
+
+-- Note : les commandes de test sont generees par un script PHP
+-- (transaction + hachage des mots de passe), non reproductible en SQL pur.
+-- Identifiants de test : sophie.martin@example.ch / Client2026
