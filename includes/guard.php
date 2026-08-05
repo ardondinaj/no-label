@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/fonctions.php';
 
 /**
@@ -29,7 +30,7 @@ function exigerConnexion(): void
     if (!estConnecte()) {
         $_SESSION['url_demandee'] = $_SERVER['REQUEST_URI'];
         messageFlash('erreur', 'Veuillez vous connecter pour acceder a cette page.');
-        rediriger('/nolabel/login.php');
+        rediriger(BASE_URL . '/login.php');
     }
 }
 

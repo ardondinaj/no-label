@@ -4,7 +4,7 @@ require_once __DIR__ . '/config/db.php';
 
 // Deja connecte : inutile de revenir ici
 if (estConnecte()) {
-    rediriger(estAdmin() ? '/nolabel/admin/index.php' : '/nolabel/index.php');
+    rediriger(estAdmin() ? BASE_URL . '/admin/index.php' : BASE_URL . '/index.php');
 }
 
 $erreurs = [];
@@ -50,7 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             messageFlash('succes', 'Bienvenue ' . $utilisateur['prenom'] . '.');
 
             $destination = $_SESSION['url_demandee']
-                ?? ($utilisateur['role'] === 'admin' ? '/nolabel/admin/index.php' : '/nolabel/index.php');
+                ?? ($utilisateur['role'] === 'admin'
+                    ? BASE_URL . '/admin/index.php'
+                    : BASE_URL . '/index.php');
             unset($_SESSION['url_demandee']);
 
             rediriger($destination);
@@ -87,5 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
         <p><button type="submit">Se connecter</button></p>
     </form>
+
+    <p><a href="<?= BASE_URL ?>/index.php">Retour au site</a></p>
 </body>
 </html>
