@@ -1,0 +1,14 @@
+# Identifiants de connexion - NE JAMAIS COMMITER
+config/config.php
+
+# Fichiers système
+Thumbs.db
+.DS_Store
+
+# Dossiers d'environnement
+node_modules/
+vendor/
+
+# Logs et fichiers temporaires
+*.log
+*.tmp
