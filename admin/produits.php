@@ -130,9 +130,12 @@ $flash = lireFlash();
                         <?= (int) $produit['stock_total'] ?>
                     </td>
                     <td><?= (int) $produit['actif'] === 1 ? 'Actif' : 'Retire' ?></td>
-                    <td>
+                    <td class="cellule-actions">
                         <a href="<?= BASE_URL ?>/admin/produit-detail.php?id=<?= (int) $produit['id'] ?>">Detail</a>
                         <a href="<?= BASE_URL ?>/admin/produit-modifier.php?id=<?= (int) $produit['id'] ?>">Modifier</a>
+                        <a href="<?= BASE_URL ?>/admin/produit-supprimer.php?id=<?= (int) $produit['id'] ?>">
+                            <?= (int) $produit['actif'] === 1 ? 'Retirer' : 'Reactiver' ?>
+                        </a>
                     </td>
                 </tr>
             <?php endforeach; ?>
