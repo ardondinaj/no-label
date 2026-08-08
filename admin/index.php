@@ -25,42 +25,72 @@ $flash = lireFlash();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration — NO LABEL</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
-    <h1>Administration NO LABEL</h1>
 
-    <p>
-        Connecté en tant que <?= e($_SESSION['utilisateur_prenom']) ?>
-        <?= e($_SESSION['utilisateur_nom']) ?>
-        — <a href="<?= BASE_URL ?>/logout.php">Déconnexion</a>
-    </p>
+<header class="admin-header">
+    <h1>Administration NO LABEL</h1>
+    <nav>
+        <a href="<?= BASE_URL ?>/index.php">Voir la boutique</a>
+        <a href="<?= BASE_URL ?>/admin/produits.php">Produits</a>
+        <a href="<?= BASE_URL ?>/admin/commandes.php">Commandes</a>
+        <a href="<?= BASE_URL ?>/logout.php">Deconnexion</a>
+    </nav>
+</header>
+
+<main>
 
     <?php foreach ($flash as $message): ?>
-        <p><strong><?= e($message['texte']) ?></strong></p>
+        <p class="message message--<?= e($message['type']) ?>"><?= e($message['texte']) ?></p>
     <?php endforeach; ?>
 
-    <h2>Vue d'ensemble</h2>
-    <ul>
-        <li><?= (int) $nbProduits ?> produits actifs</li>
-        <li><?= (int) $nbCommandes ?> commandes</li>
-        <li><?= (int) $nbClients ?> clients</li>
-    </ul>
+    <p class="aide">
+        Connecte en tant que <?= e($_SESSION['utilisateur_prenom']) ?>
+        <?= e($_SESSION['utilisateur_nom']) ?>
+    </p>
 
-    <h2>Ruptures de stock</h2>
-    <?php if ($rupture): ?>
-        <ul>
-        <?php foreach ($rupture as $r): ?>
-            <li><?= e($r['nom']) ?> — taille <?= e($r['code']) ?></li>
-        <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>Aucune rupture.</p>
-    <?php endif; ?>
+    <section class="apercu">
+        <h2>Vue d'ensemble</h2>
+        <dl>
+            <dt>Produits actifs</dt><dd><?= (int) $nbProduits ?></dd>
+            <dt>Commandes</dt><dd><?= (int) $nbCommandes ?></dd>
+            <dt>Clients</dt><dd><?= (int) $nbClients ?></dd>
+        </dl>
+    </section>
 
-    <h2>Gestion</h2>
-    <ul>
-        <li><a href="<?= BASE_URL ?>/admin/produits.php">Produits</a></li>
-        <li><a href="<?= BASE_URL ?>/admin/commandes.php">Commandes</a></li>
-    </ul>
+    <section class="ruptures">
+        <h2>Ruptures de stock</h2>
+
+        <?php if ($rupture): ?>
+            <table class="tableau">
+                <thead>
+                    <tr><th>Produit</th><th>Taille</th></tr>
+                </thead>
+                <tbody>
+                <?php foreach ($rupture as $r): ?>
+                    <tr>
+                        <td><?= e($r['nom']) ?></td>
+                        <td class="stock--vide"><?= e($r['code']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Aucune rupture.</p>
+        <?php endif; ?>
+    </section>
+
+    <section class="gestion">
+        <h2>Gestion</h2>
+        <p class="actions">
+            <a href="<?= BASE_URL ?>/admin/produits.php" class="bouton">Produits</a>
+            <a href="<?= BASE_URL ?>/admin/commandes.php" class="bouton">Commandes</a>
+            <a href="<?= BASE_URL ?>/admin/produit-nouveau.php" class="bouton">Nouveau produit</a>
+        </p>
+    </section>
+
+</main>
+
 </body>
 </html>

@@ -59,37 +59,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion — NO LABEL</title>
-</head>
-<body>
-    <h1>Connexion</h1>
 
-    <?php if ($erreurs): ?>
+$titrePage = 'Connexion';
+require __DIR__ . '/includes/header.php';
+?>
+
+<h1>Connexion</h1>
+
+<?php if ($erreurs): ?>
+    <div class="message message--erreur">
         <ul>
             <?php foreach ($erreurs as $erreur): ?>
                 <li><?= e($erreur) ?></li>
             <?php endforeach; ?>
         </ul>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
 
-    <form method="post" action="">
-        <p>
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" value="<?= e($email) ?>" required>
-        </p>
-        <p>
-            <label for="mot_de_passe">Mot de passe</label><br>
-            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-        </p>
-        <p><button type="submit">Se connecter</button></p>
-    </form>
+<form method="post" action="" class="form-connexion" novalidate>
+    <p class="champ">
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" name="email" value="<?= e($email) ?>">
+    </p>
 
-    <p><a href="<?= BASE_URL ?>/index.php">Retour au site</a></p>
-</body>
-</html>
+    <p class="champ">
+        <label for="mot_de_passe">Mot de passe</label>
+        <input type="password" id="mot_de_passe" name="mot_de_passe">
+    </p>
+
+    <p class="actions">
+        <button type="submit" class="bouton bouton--principal">Se connecter</button>
+    </p>
+</form>
+
+<p>Pas encore de compte ? <a href="<?= BASE_URL ?>/inscription.php">En creer un</a></p>
+
+<?php require __DIR__ . '/includes/footer.php'; ?>
